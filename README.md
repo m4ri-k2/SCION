@@ -1,2 +1,2 @@
 # SCION
-State Consistency &amp; Integrity Observer for flight coNtrol
+SCION — A State Consistency & Integrity Observer for Fly-By-Wire safety architectures.
