@@ -1,4 +1,4 @@
-#ifndef SCION_TYPES_H
+#ifndef SCION_TYPES_H // 말그대로 SCION에서의 기본 타입 정의
 #define SCION_TYPES_H
 
 #include <stdint.h>
@@ -6,7 +6,7 @@
 
 typedef enum // lane 상태평가
 {
-    HEALTH_OK = 0,
+    HEALTH_OK = 0, 
     HEALTH_SUSPECT,
     HEALTH_FAILED
 }
@@ -14,12 +14,12 @@ health_t;
 
 typedef enum // os 모드
 {
-    MODE_NORMAL = 0,
-    MODE_SAFE
+    MODE_NORMAL = 0, // 정상
+    MODE_SAFE // 안전-비정상
 }
 mode_t;
 
-typedef struct 
+typedef struct // 시퀀스/timestamp 값 구조체
 {
     uint32_t seq; // 시퀀스 값. 음수 나오면 그것대로 문제기 때문에 무조건 unsigned
     uint64_t timestamp; // timestamp 값. 동일한 이유로 무조건 unsigned
@@ -27,14 +27,14 @@ typedef struct
 } 
 message_meta_t;
 
-typedef struct 
+typedef struct // lane 하나당 해당 주기에 대해 내린 판단 요약본
 {
-    uint32_t lane_id;
-    uint32_t seq;
-    uint64_t timestamp;
+    uint32_t lane_id; // lane 고유 아이디. 해당 값이 몇 번 lane에서 나왔는지
+    uint32_t seq; // lane 간 시퀀스 값-지연 및 오류 감지용
+    uint64_t timestamp; // lane 간 timestamp 값-지연 및 오류 감지용
 
-    health_t health;
-    mode_t   recommended_mode;
+    health_t health; // 해당 lane의 신뢰도 상태 평가
+    mode_t   recommended_mode; // lane 하나 당 상태 권고. 결정값 아님. 2oo3/3oo3은 투표 가서 함. 
 } 
 decision_summary_t;
 
